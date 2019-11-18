@@ -1,0 +1,2 @@
+include ':app', ':lib-alert'
+rootProject.name='QiuckAlert'
