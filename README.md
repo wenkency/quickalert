@@ -25,8 +25,6 @@ implementation 'com.github.wenkency:quickalert:1.1.0'
                 .build();
         // 显示在View的下面
         // popup.show(view);
-        // 显示在View的下面，窗口宽居屏幕中间
-        // popup.showWindowCenter(view);
         // 显示在View的下面，窗口宽居view中间
         popup.showViewCenter(view);
 
