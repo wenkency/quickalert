@@ -12,20 +12,25 @@ allprojects {
 	}
 
 
-implementation 'com.github.wenkency:quickalert:1.0.0'
+implementation 'com.github.wenkency:quickalert:1.1.0'
 
 ```
 
 ### 使用方式
 ```
- new QuickBuilder(this)
+        QuickDialog popup = new QuickBuilder(this)
                 .setContentView(R.layout.dialog_test)
+                .setWidthScale(0.5f)
                 .fromBottom(true)
-                .setFullWidth()
-                .show();
+                .build();
+        // 显示在View的下面
+        // popup.show(view);
+        // 显示在View的下面，窗口宽居屏幕中间
+        // popup.showWindowCenter(view);
+        // 显示在View的下面，窗口宽居view中间
+        popup.showViewCenter(view);
 
 ```
 
 ### 运行结果
-
-<img src="screenshot/image.jpg" width="360px"/>
+![](screenshot/image.jpg "运行结果")

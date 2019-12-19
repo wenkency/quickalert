@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -19,10 +20,13 @@ import androidx.annotation.NonNull;
 
 public class QuickDialog extends Dialog {
     private QuickViewHelper mViewHelper;
-
+    protected View mContentView;
+    protected int widthPixels;
+    protected int mContentWidth;
 
     QuickDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
+        widthPixels = context.getResources().getDisplayMetrics().widthPixels;
     }
 
     /**
@@ -75,9 +79,9 @@ public class QuickDialog extends Dialog {
         if (mViewHelper == null) {
             throw new IllegalArgumentException("请调用setContentView方法设置布局");
         }
-        View contentView = mViewHelper.getContentView();
-        setContentView(contentView);
-
+        mContentView = mViewHelper.getContentView();
+        onViewCreated(mContentView);
+        setContentView(mContentView);
         // 2.设置文本
         int textSize = params.mTextArray.size();
         for (int i = 0; i < textSize; i++) {
@@ -99,7 +103,7 @@ public class QuickDialog extends Dialog {
         }
         // 宽高
         WindowManager.LayoutParams lp = window.getAttributes();
-        lp.width = (int) (params.mWidth * params.mScale);
+        mContentWidth = lp.width = (int) (params.mWidth * params.mScale);
         lp.height = params.mHeight;
         window.setAttributes(lp);
         // 设置Window背景
@@ -127,6 +131,86 @@ public class QuickDialog extends Dialog {
         setOnDismissListener(params.mOnDismissListener);
         setOnKeyListener(params.mOnKeyListener);
     }
+
+    public void showAtLocation(int gravity, int x, int y) {
+        Window window = getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        window.setGravity(gravity);
+        params.x = x;
+        params.y = y;
+        // 显示
+        show();
+    }
+
+    public void showAtLocation(int x, int y) {
+        // Left Top (坐标原点为右上角)
+        int gravity = Gravity.LEFT | Gravity.TOP;
+        showAtLocation(gravity, x, y);
+    }
+
+    protected void onViewCreated(View contentView) {
+
+    }
+
+    @Override
+    public void show() {
+        super.show();
+    }
+
+    public void show(View view, int gravity, int offsetX, int offsetY) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        int x = location[0] + offsetX;
+        // 窗口居中
+        if (gravity == Gravity.CENTER) {
+            x = (widthPixels - mContentWidth) / 2;
+        }
+        int y = location[1] - StatusBarUtils.getStatusBarHeight(getContext()) + view.getHeight() + offsetY;
+        Window window = getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.gravity = gravity;
+        params.x = x;
+        params.y = y;
+        this.show();
+    }
+
+    /**
+     * 显示在View的下面
+     */
+    public void show(View view) {
+        show(view, Gravity.TOP | Gravity.START, 0, 0);
+    }
+
+
+    /**
+     * 显示在View的下面，窗口宽居屏幕中间
+     */
+    public void showWindowCenter(View view, int offsetY) {
+        show(view, Gravity.CENTER, 0, dp2px(getContext(), offsetY));
+    }
+
+    /**
+     * 显示在View的下面，窗口宽居屏幕中间
+     */
+    public void showWindowCenter(View view) {
+        showWindowCenter(view, 0);
+    }
+
+    /**
+     * 显示在View正中间
+     */
+    public void showViewCenter(View view, int offsetY) {
+        int offsetX = (mContentWidth - view.getWidth()) / 2;
+        show(view, Gravity.TOP | Gravity.START, -offsetX, dp2px(getContext(), offsetY));
+    }
+
+    /**
+     * 显示在View正中间
+     */
+    public void showViewCenter(View view) {
+        showViewCenter(view, 0);
+    }
+
 
     public static int dp2px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;

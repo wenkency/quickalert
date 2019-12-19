@@ -80,6 +80,14 @@ public class QuickBuilder {
         return this;
     }
 
+    /**
+     * 设置显示作用在哪个View上
+     */
+    public QuickBuilder setAnchorView(View view) {
+        mParams.mAnchorView = view;
+        return this;
+    }
+
 
     /**
      * 设置ContentView背景的颜色：默认白色
@@ -243,15 +251,6 @@ public class QuickBuilder {
         return dialog;
     }
 
-    /**
-     * 构建QuickPopup
-     */
-    public QuickPopup buildPopup() {
-        QuickPopup popup = new QuickPopup(mActivity);
-        popup.apply(mParams);
-        return popup;
-    }
-
 
     /**
      * Dialog构建参数
@@ -265,6 +264,7 @@ public class QuickBuilder {
         DialogInterface.OnDismissListener mOnDismissListener;
         DialogInterface.OnKeyListener mOnKeyListener;
         View mContentView;
+        View mAnchorView;
         int mLayoutId;
         int mWidth;
         int mHeight = ViewGroup.LayoutParams.WRAP_CONTENT;
