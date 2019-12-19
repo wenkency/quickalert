@@ -33,4 +33,5 @@ implementation 'com.github.wenkency:quickalert:1.1.0'
 ```
 
 ### 运行结果
+
 ![](screenshot/image.jpg "运行结果")
