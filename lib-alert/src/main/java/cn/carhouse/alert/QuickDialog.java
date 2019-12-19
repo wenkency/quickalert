@@ -22,11 +22,13 @@ public class QuickDialog extends Dialog {
     private QuickViewHelper mViewHelper;
     protected View mContentView;
     protected int widthPixels;
+    protected int heightPixels;
     protected int mContentWidth;
 
     QuickDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
         widthPixels = context.getResources().getDisplayMetrics().widthPixels;
+        heightPixels = context.getResources().getDisplayMetrics().heightPixels;
     }
 
     /**
@@ -132,21 +134,6 @@ public class QuickDialog extends Dialog {
         setOnKeyListener(params.mOnKeyListener);
     }
 
-    public void showAtLocation(int gravity, int x, int y) {
-        Window window = getWindow();
-        WindowManager.LayoutParams params = window.getAttributes();
-        window.setGravity(gravity);
-        params.x = x;
-        params.y = y;
-        // 显示
-        show();
-    }
-
-    public void showAtLocation(int x, int y) {
-        // Left Top (坐标原点为右上角)
-        int gravity = Gravity.LEFT | Gravity.TOP;
-        showAtLocation(gravity, x, y);
-    }
 
     protected void onViewCreated(View contentView) {
 
@@ -157,7 +144,7 @@ public class QuickDialog extends Dialog {
         super.show();
     }
 
-    public void show(View view, int gravity, int offsetX, int offsetY) {
+    public void show(View view, int gravity, int offsetX, int offsetY, boolean isResetHeight) {
         int[] location = new int[2];
         view.getLocationOnScreen(location);
         int x = location[0] + offsetX;
@@ -171,46 +158,50 @@ public class QuickDialog extends Dialog {
         params.gravity = gravity;
         params.x = x;
         params.y = y;
+        if (isResetHeight) {
+            params.height = heightPixels - y - StatusBarUtils.getStatusBarHeight(getContext());
+        }
+        window.setAttributes(params);
         this.show();
+    }
+
+    /**
+     * 显示在View的下面
+     *
+     * @param isResetHeight 重新设置高度，针对特殊的显示：如上面背景不模糊这种场景
+     */
+    public void show(View view, boolean isResetHeight) {
+        show(view, Gravity.TOP | Gravity.START, 0, 0, isResetHeight);
     }
 
     /**
      * 显示在View的下面
      */
     public void show(View view) {
-        show(view, Gravity.TOP | Gravity.START, 0, 0);
-    }
-
-
-    /**
-     * 显示在View的下面，窗口宽居屏幕中间
-     */
-    public void showWindowCenter(View view, int offsetY) {
-        show(view, Gravity.CENTER, 0, dp2px(getContext(), offsetY));
-    }
-
-    /**
-     * 显示在View的下面，窗口宽居屏幕中间
-     */
-    public void showWindowCenter(View view) {
-        showWindowCenter(view, 0);
+        show(view, false);
     }
 
     /**
      * 显示在View正中间
      */
-    public void showViewCenter(View view, int offsetY) {
-        int offsetX = (mContentWidth - view.getWidth()) / 2;
-        show(view, Gravity.TOP | Gravity.START, -offsetX, dp2px(getContext(), offsetY));
+    public void showViewCenter(View view, int offsetX, int offsetY, boolean isResetHeight) {
+        int x = (mContentWidth - view.getWidth()) / 2 + offsetX;
+        show(view, Gravity.TOP | Gravity.START, -x, dp2px(getContext(), offsetY), isResetHeight);
+    }
+
+    /**
+     * 显示在View正中间
+     */
+    public void showViewCenter(View view, boolean isResetHeight) {
+        showViewCenter(view, 0, 0, isResetHeight);
     }
 
     /**
      * 显示在View正中间
      */
     public void showViewCenter(View view) {
-        showViewCenter(view, 0);
+        showViewCenter(view, false);
     }
-
 
     public static int dp2px(Context context, float dp) {
         final float scale = context.getResources().getDisplayMetrics().density;

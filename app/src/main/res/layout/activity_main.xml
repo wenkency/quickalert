@@ -9,12 +9,43 @@
 
     <TextView
         android:layout_width="250dp"
-        android:layout_height="80dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:onClick="show"
-        android:text="显示弹窗"
+        android:text="特殊弹窗"
         android:textColor="@android:color/white"
         android:textSize="18dp" />
 
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:onClick="showScreen"
+        android:text="Screen中间弹窗"
+        android:textColor="@android:color/white"
+        android:textSize="18dp" />
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:onClick="showView"
+        android:text="View中间弹窗"
+        android:textColor="@android:color/white"
+        android:textSize="18dp" />
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:onClick="showViewDown"
+        android:text="View下面弹窗"
+        android:textColor="@android:color/white"
+        android:textSize="18dp" />
 </LinearLayout>
