@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         popup.show();
     }
-
+    // 显示在View的下面，且在中间
     public void showView(View view) {
         final QuickDialog popup = new QuickBuilder(this)
                 .setContentView(R.layout.dialog_window)
