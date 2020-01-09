@@ -18,15 +18,65 @@ implementation 'com.github.wenkency:quickalert:1.1.0'
 
 ### 使用方式
 ```
-        QuickDialog popup = new QuickBuilder(this)
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+    }
+
+    public void show(View view) {
+        final QuickDialog popup = new QuickBuilder(this)
                 .setContentView(R.layout.dialog_test)
-                .setWidthScale(0.5f)
+                .setFullWidth()
+                .isSetBackground(false)
                 .fromBottom(true)
+                .isDimEnabled(false)
                 .build();
         // 显示在View的下面
         // popup.show(view);
         // 显示在View的下面，窗口宽居view中间
+        popup.setOnClickListener(R.id.v_bg, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popup.dismiss();
+            }
+        });
+        // 比较特殊：自己定义模糊背景
+        popup.showViewCenter(view, true);
+    }
+    // 显示中间和Dialog一样
+    public void showScreen(View view) {
+        final QuickDialog popup = new QuickBuilder(this)
+                .setContentView(R.layout.dialog_window)
+                .setWidthScale(0.8f)
+                .build();
+        popup.show();
+    }
+
+    public void showView(View view) {
+        final QuickDialog popup = new QuickBuilder(this)
+                .setContentView(R.layout.dialog_window)
+                .setWidthScale(0.5f)
+                .fromBottom(true)
+                .isDimEnabled(false)
+                .build();
         popup.showViewCenter(view);
+    }
+    // 显示在View的下面，和Popup一样
+    public void showViewDown(View view) {
+        final QuickDialog popup = new QuickBuilder(this)
+                .setContentView(R.layout.dialog_window)
+                .setWidthScale(0.5f)
+                .fromBottom(true)
+                .isDimEnabled(false)
+                .build();
+        popup.show(view);
+    }
+}
 
 ```
 
