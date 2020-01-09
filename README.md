@@ -1,5 +1,5 @@
-# QuickDialog、QuickPopup
-快速构建Dialog和PopupWindow。
+# QuickDialog
+具有Dialog和PopupWindow的Dialog，可代替代Dialog和PopupWindow。
 
 ### 引入
 
