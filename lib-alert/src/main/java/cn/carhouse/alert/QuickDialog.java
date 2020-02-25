@@ -127,7 +127,7 @@ public class QuickDialog extends Dialog {
 
         // 设置外面能不能点击
         setCancelable(params.mCancelable);
-        setCanceledOnTouchOutside(params.mCancelable);
+        setCanceledOnTouchOutside(params.mCancelableTouchOutside);
         // 设置事件监听
         setOnCancelListener(params.mOnCancelListener);
         setOnDismissListener(params.mOnDismissListener);

@@ -10,12 +10,11 @@ import cn.carhouse.alert.QuickDialog;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
     }
 
     public void show(View view) {
@@ -66,4 +65,5 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         popup.show(view);
     }
+
 }

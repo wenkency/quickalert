@@ -194,6 +194,14 @@ public class QuickBuilder {
     }
 
     /**
+     * 设置点击空白是否消失
+     */
+    public QuickBuilder cancelableTouchOutside(boolean cancelableTouchOutside) {
+        mParams.mCancelableTouchOutside = cancelableTouchOutside;
+        return this;
+    }
+
+    /**
      * 设置取消的监听
      */
     public QuickBuilder setOnCancelListener(DialogInterface.OnCancelListener onCancelListener) {
@@ -276,6 +284,7 @@ public class QuickBuilder {
         boolean mIsSetBg = true;
         boolean mIsDimEnabled = true;
         boolean mCancelable = true;
+        boolean mCancelableTouchOutside = true;
         //
         boolean mIsHeightFull = false;
 
