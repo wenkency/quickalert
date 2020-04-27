@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.util.DisplayMetrics;
 import android.util.SparseArray;
 import android.view.Gravity;
@@ -240,7 +241,16 @@ public class QuickBuilder {
         mParams.setOnClickListener(viewId, onClickListener);
         return this;
     }
-
+    /**
+     * 背景
+     */
+    public QuickBuilder setBgDrawable(GradientDrawable bgDrawable) {
+        if (bgDrawable!=null){
+            mParams.mIsSetBg = true;
+            mParams.mBgDrawable = bgDrawable;
+        }
+        return this;
+    }
     /**
      * 构建Dialog
      */
@@ -282,6 +292,7 @@ public class QuickBuilder {
         int mBgRadius = 5;
         int mBgColor = Color.parseColor("#ffffff");
         boolean mIsSetBg = true;
+        GradientDrawable mBgDrawable;
         boolean mIsDimEnabled = true;
         boolean mCancelable = true;
         boolean mCancelableTouchOutside = true;

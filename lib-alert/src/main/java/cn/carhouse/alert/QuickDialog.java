@@ -110,12 +110,16 @@ public class QuickDialog extends Dialog {
         window.setAttributes(lp);
         // 设置Window背景
         if (params.mIsSetBg) {
-            final GradientDrawable bg = new GradientDrawable();
-            int radius = dp2px(getContext(), params.mBgRadius);
-            // 1 2 3 4(顺时针)
-            bg.setCornerRadii(new float[]{radius, radius, radius, radius, radius, radius, radius, radius});
-            bg.setColor(params.mBgColor);
-            window.setBackgroundDrawable(bg);
+            if (params.mBgDrawable != null) {
+                window.setBackgroundDrawable(params.mBgDrawable);
+            } else {
+                final GradientDrawable bg = new GradientDrawable();
+                int radius = dp2px(getContext(), params.mBgRadius);
+                // 1 2 3 4(顺时针)
+                bg.setCornerRadii(new float[]{radius, radius, radius, radius, radius, radius, radius, radius});
+                bg.setColor(params.mBgColor);
+                window.setBackgroundDrawable(bg);
+            }
         }
 
         // 设置背景是否模糊
@@ -207,4 +211,6 @@ public class QuickDialog extends Dialog {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
+
+
 }
