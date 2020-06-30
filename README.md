@@ -12,7 +12,7 @@ allprojects {
 	}
 
 
-implementation 'com.github.wenkency:quickalert:1.4.0'
+implementation 'com.github.wenkency:quickalert:1.5.0'
 
 ```
 

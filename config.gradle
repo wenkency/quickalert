@@ -1,6 +1,7 @@
 ext {
     app = [
             compileSdkVersion: 30,
+            buildToolsVersion: "30.0.0",
             minSdkVersion    : 14,
             targetSdkVersion : 30,
             versionCode      : 1,
