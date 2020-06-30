@@ -12,6 +12,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+
 
 /**
  * Dialog构建器
@@ -23,7 +25,7 @@ public class QuickBuilder {
     // 构建Dialog的参数
     private QuickParams mParams;
 
-    public QuickBuilder(Activity activity) {
+    public QuickBuilder(@NonNull Activity activity) {
         this.mActivity = activity;
         mParams = new QuickParams(activity);
     }
@@ -241,16 +243,18 @@ public class QuickBuilder {
         mParams.setOnClickListener(viewId, onClickListener);
         return this;
     }
+
     /**
      * 背景
      */
     public QuickBuilder setBgDrawable(GradientDrawable bgDrawable) {
-        if (bgDrawable!=null){
+        if (bgDrawable != null) {
             mParams.mIsSetBg = true;
             mParams.mBgDrawable = bgDrawable;
         }
         return this;
     }
+
     /**
      * 构建Dialog
      */

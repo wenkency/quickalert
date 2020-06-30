@@ -1,8 +1,8 @@
 ext {
     app = [
-            compileSdkVersion: 28,
-            minSdkVersion    : 15,
-            targetSdkVersion : 28,
+            compileSdkVersion: 30,
+            minSdkVersion    : 14,
+            targetSdkVersion : 30,
             versionCode      : 1,
             versionName      : "1.0"
     ]

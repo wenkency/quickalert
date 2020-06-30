@@ -12,13 +12,13 @@
     </style>
     <!--从下弹出来的基本动画-->
     <style name="AnimDialogBottom" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/anim_slide_in</item>
-        <item name="android:windowExitAnimation">@anim/anim_slide_out</item>
+        <item name="android:windowEnterAnimation">@anim/pop_anim_slide_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_anim_slide_out</item>
     </style>
 
     <style name="AnimDialogTop" parent="@android:style/Animation">
-        <item name="android:windowEnterAnimation">@anim/anim_slide_top_in</item>
-        <item name="android:windowExitAnimation">@anim/anim_slide_top_out</item>
+        <item name="android:windowEnterAnimation">@anim/pop_anim_slide_top_in</item>
+        <item name="android:windowExitAnimation">@anim/pop_anim_slide_top_out</item>
     </style>
     <!--自字义AlertDialog的主题-->
 </resources>
