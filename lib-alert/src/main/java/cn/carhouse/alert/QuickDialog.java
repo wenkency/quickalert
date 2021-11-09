@@ -163,7 +163,7 @@ public class QuickDialog extends Dialog {
         params.x = x;
         params.y = y;
         if (isResetHeight) {
-            params.height = heightPixels - y - StatusBarUtils.getStatusBarHeight(getContext());
+            params.height = heightPixels - y /*- StatusBarUtils.getStatusBarHeight(getContext())*/;
         }
         window.setAttributes(params);
         this.show();
