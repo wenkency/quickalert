@@ -2,6 +2,7 @@ package cn.carhouse.qiuckalert_sample;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.PopupWindow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void show(View view) {
+
+  /*      PopupWindow popupWindow;
+        popupWindow.showAsDropDown(view);*/
         final QuickDialog popup = new QuickBuilder(this)
                 .setContentView(R.layout.dialog_test)
                 .setFullWidth()

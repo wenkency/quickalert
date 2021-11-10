@@ -1,5 +1,6 @@
 package cn.carhouse.alert;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
@@ -24,11 +25,18 @@ public class QuickDialog extends Dialog {
     protected int widthPixels;
     protected int heightPixels;
     protected int mContentWidth;
+    protected int offsetStatusHeight = 0;
 
-    QuickDialog(@NonNull Context context, int themeResId) {
+    QuickDialog(@NonNull Activity context, int themeResId) {
         super(context, themeResId);
         widthPixels = context.getResources().getDisplayMetrics().widthPixels;
         heightPixels = context.getResources().getDisplayMetrics().heightPixels;
+        View decorView = context.getWindow().getDecorView();
+        int height = decorView.getHeight();
+        int statusBarHeight = StatusBarUtils.getStatusBarHeight(context);
+        if (height - heightPixels - statusBarHeight <= dp2px(context, 1)) {
+            offsetStatusHeight = statusBarHeight + height - heightPixels - statusBarHeight;
+        }
     }
 
     /**
@@ -156,14 +164,14 @@ public class QuickDialog extends Dialog {
         if (gravity == Gravity.CENTER) {
             x = (widthPixels - mContentWidth) / 2;
         }
-        int y = location[1] - StatusBarUtils.getStatusBarHeight(getContext()) + view.getHeight() + offsetY;
+        int y = location[1] - offsetStatusHeight + view.getHeight() + offsetY;
         Window window = getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.gravity = gravity;
         params.x = x;
         params.y = y;
         if (isResetHeight) {
-            params.height = heightPixels - y /*- StatusBarUtils.getStatusBarHeight(getContext())*/;
+            params.height = heightPixels - y;
         }
         window.setAttributes(params);
         this.show();

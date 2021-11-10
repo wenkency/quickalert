@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
 
     <!--自字义AlertDialog的主题-->
@@ -7,6 +7,11 @@
         <item name="android:windowIsFloating">true</item><!-- 是否浮现在activity之上 -->
         <item name="android:windowIsTranslucent">true</item><!-- 半透明 -->
         <item name="android:windowNoTitle">true</item><!-- 无标题 -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowTranslucentStatus" tools:targetApi="kitkat">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+
         <item name="android:windowBackground">@android:color/transparent</item><!-- 自己想要的背景 -->
         <item name="android:backgroundDimEnabled">true</item><!-- 模糊 -->
     </style>
