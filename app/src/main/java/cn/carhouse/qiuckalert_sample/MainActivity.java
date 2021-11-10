@@ -2,7 +2,6 @@ package cn.carhouse.qiuckalert_sample;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.PopupWindow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,9 +18,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void show(View view) {
-
-  /*      PopupWindow popupWindow;
-        popupWindow.showAsDropDown(view);*/
         final QuickDialog popup = new QuickBuilder(this)
                 .setContentView(R.layout.dialog_test)
                 .setFullWidth()
@@ -29,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
                 .fromBottom(true)
                 .isDimEnabled(false)
                 .build();
-        // 显示在View的下面
-        // popup.show(view);
         // 显示在View的下面，窗口宽居view中间
         popup.setOnClickListener(R.id.v_bg, new View.OnClickListener() {
             @Override
@@ -38,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 popup.dismiss();
             }
         });
-        // 比较特殊：自己定义模糊背景
+        // 比较特殊：自己在布局定义模糊背景
         popup.showViewCenter(view, true);
     }
 
